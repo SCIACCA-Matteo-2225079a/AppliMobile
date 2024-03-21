@@ -12,20 +12,20 @@ function App() {
 
     function addTask(text) {
         const newTask = {
-            id: Date.now(), text, completed: false
+            id: Date.now(), title: text, status: false
         };
-        setTasks([...tasks, newTask]);
+        setToDo([...toDo, newTask]);
         setText('');
     }
 
     function deleteTask(id) {
-        setTasks(tasks.filter(task => task.id !== id));
+        setToDo(toDo.filter(task => task.id !== id));
     }
 
     function toggleCompleted(id) {
-        setTasks(tasks.map(task => {
+        setToDo(toDo.map(task => {
             if (task.id === id) {
-                return {...task, completed: !task.completed};
+                return {...task, status: !task.status};
             } else {
                 return task;
             }
@@ -34,18 +34,20 @@ function App() {
 
     return (
         <div className="todo-list">
-            {tasks.map(task => (
-                <TodoItem
-                key = {task.id}
-                task = {task}
-                deleteTask = {deleteTask}
-                toggleCompleted={toggleCompleted}
+            {toDo.map(task => (
+                <MyList
+                    key={task.id}
+                    type="text"
+                    name={task.title}
+                    completed={task.status}
+                    deleteTask={() => deleteTask(task.id)}
+                    toggleCompleted={() => toggleCompleted(task.id)}
                 />
             ))}
             <input
-                value = {text}
-                onChange = {e => setText(e.target.value)}
-                />
+                value={text}
+                onChange={e => setText(e.target.value)}
+            />
             <button onClick={() => addTask(text)}>Add</button>
         </div>
     );
