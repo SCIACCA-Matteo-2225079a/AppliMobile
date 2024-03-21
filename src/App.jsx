@@ -1,4 +1,3 @@
-import MyList from "./MyList";
 import './App.css';
 import TodoList from "./TodoList";
 

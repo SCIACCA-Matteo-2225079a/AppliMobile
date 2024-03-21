@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import TodoItem from "./TodoItem.jsx";
 
 function TodoList() {
     const [toDo, setToDo] = useState([
-        {"id": 1, "title": "Task 1", "status": false},
-        {"id": 2, "title": "Task 2", "status": false}
+        { "id": 1, "title": "Task 1", "status": false },
+        { "id": 2, "title": "Task 2", "status": false }
     ]);
 
     const [text, setText] = useState('');
@@ -24,21 +24,19 @@ function TodoList() {
     function toggleCompleted(id) {
         setToDo(toDo.map(task => {
             if (task.id === id) {
-                return {...task, status: !task.status};
+                return { ...task, status: !task.status };
             } else {
                 return task;
             }
         }));
-}
+    }
 
     return (
         <div className="todo-list">
             {toDo.map(task => (
                 <TodoItem
                     key={task.id}
-                    type="text"
-                    text={task.title}
-                    completed={task.status}
+                    task={task} // Passer task au lieu de text et completed
                     deleteTask={() => deleteTask(task.id)}
                     toggleCompleted={() => toggleCompleted(task.id)}
                 />
