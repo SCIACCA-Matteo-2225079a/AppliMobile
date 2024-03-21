@@ -1,6 +1,7 @@
 import MyList from "./MyList";
 import { useState } from "react";
 import './App.css';
+import TodoItem from "./TodoItem";
 
 function App() {
     const [toDo, setToDo] = useState([
