@@ -1,6 +1,6 @@
 import React from "react";
 
-function MyButton(props) {
+function MyList(props) {
     if (props.type === "textarea") {
         return (
             <textarea placeholder={props.name}></textarea>
@@ -12,4 +12,4 @@ function MyButton(props) {
     }
 }
 
-export default MyButton;
+export default MyList;
