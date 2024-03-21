@@ -1,4 +1,5 @@
 import React from 'react';
+
 function TodoItem({task, deleteTask, toggleCompleted }) {
     function handleChange() {
         toggleCompleted(task.id);
@@ -8,10 +9,10 @@ function TodoItem({task, deleteTask, toggleCompleted }) {
         <div className="todo-item">
             <input
                 type="checkbox"
-                checked={task.completed}
+                checked={task.status}
                 onChange={handleChange}
             />
-            <p>{task.text}</p>
+            <p>{task.title}</p>
             <button onClick={() => deleteTask(task.id)}>
                 X
             </button>
