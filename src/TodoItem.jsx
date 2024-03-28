@@ -49,7 +49,7 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
                 <p>{task.title}</p>
             )}
             {isEditing ? (
-                <button onClick={handleSave}>Save</button>
+                <button onClick={handleSave}>✅</button>
             ) : (
                 <button onClick={handleEdit}>🖊️</button>
             )}
