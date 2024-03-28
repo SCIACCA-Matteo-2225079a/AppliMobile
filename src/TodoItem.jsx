@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 function TodoItem({task, deleteTask, toggleCompleted }) {
     function handleChange() {
