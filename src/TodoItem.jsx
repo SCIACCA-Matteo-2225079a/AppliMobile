@@ -7,7 +7,7 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
     const [editedTitle, setEditedTitle] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-
+    const [selectedDate, setSelectedDate] = useState(null);
 
     React.useEffect(() => {
         setEditedTitle(task.title);
@@ -31,6 +31,9 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
         setIsCalendarOpen(!isCalendarOpen);
     }
 
+    function handleDateChange(date) {
+        setSelectedDate(date);
+    }
 
     return (
         <div className="todo-item">
@@ -54,7 +57,8 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
                 <button onClick={handleEdit}>🖊️</button>
             )}
             <button onClick={toggleCalendar}>📅</button>
-            {isCalendarOpen && <Calendar />}
+            {isCalendarOpen && <Calendar onChange={handleDateChange} value={selectedDate} />} {}
+            {selectedDate && <p>{selectedDate.toDateString()}</p>} {}
             <button onClick={() => deleteTask(task.id)}>🗑️</button>
         </div>
     );
