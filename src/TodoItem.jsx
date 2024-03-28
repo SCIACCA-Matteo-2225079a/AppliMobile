@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import './index.css';
 
 function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
-    const [editedTitle, setEditedTitle] = useState(task.title);
+    const [editedTitle, setEditedTitle] = useState('');
     const [isEditing, setIsEditing] = useState(false);
+
+    React.useEffect(() => {
+        setEditedTitle(task.title);
+    }, [task]);
 
     function handleChange() {
         toggleCompleted(task.id);
@@ -19,10 +23,6 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
         setIsEditing(false);
     }
 
-    function handleTitleChange(event) {
-        setEditedTitle(event.target.value);
-    }
-
     return (
         <div className="todo-item">
             <input
@@ -34,7 +34,7 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
                 <input
                     type="text"
                     value={editedTitle}
-                    onChange={handleTitleChange}
+                    onChange={(e) => setEditedTitle(e.target.value)}
                 />
             ) : (
                 <p>{task.title}</p>
