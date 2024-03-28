@@ -8,6 +8,7 @@ function TodoList() {
     ]);
 
     const [text, setText] = useState('');
+    const [editingTaskId, setEditingTaskId] = useState(null);
 
     function addTask(text) {
         const newTask = {
@@ -19,6 +20,17 @@ function TodoList() {
 
     function deleteTask(id) {
         setToDo(toDo.filter(task => task.id !== id));
+    }
+
+    function updateTask(id, newTitle) {
+        setToDo(toDo.map(task => {
+            if (task.id === id) {
+                return { ...task, title: newTitle };
+            } else {
+                return task;
+            }
+        }));
+        setEditingTaskId(null);
     }
 
     function toggleCompleted(id) {
@@ -36,9 +48,12 @@ function TodoList() {
             {toDo.map(task => (
                 <TodoItem
                     key={task.id}
-                    task={task} // Passer task au lieu de text et completed
+                    task={task}
                     deleteTask={() => deleteTask(task.id)}
                     toggleCompleted={() => toggleCompleted(task.id)}
+                    updateTask={(newTitle) => updateTask(task.id, newTitle)}
+                    isEditing={editingTaskId === task.id}
+                    setEditingTaskId={setEditingTaskId}
                 />
             ))}
             <input
