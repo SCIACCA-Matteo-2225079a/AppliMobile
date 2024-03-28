@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './index.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
     const [editedTitle, setEditedTitle] = useState('');
     const [isEditing, setIsEditing] = useState(false);
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
 
     React.useEffect(() => {
         setEditedTitle(task.title);
@@ -22,6 +26,11 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
         updateTask(task.id, editedTitle);
         setIsEditing(false);
     }
+
+    function toggleCalendar() {
+        setIsCalendarOpen(!isCalendarOpen);
+    }
+
 
     return (
         <div className="todo-item">
@@ -44,6 +53,8 @@ function TodoItem({ task, deleteTask, updateTask, toggleCompleted }) {
             ) : (
                 <button onClick={handleEdit}>🖊️</button>
             )}
+            <button onClick={toggleCalendar}>📅</button>
+            {isCalendarOpen && <Calendar />}
             <button onClick={() => deleteTask(task.id)}>🗑️</button>
         </div>
     );
